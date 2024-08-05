@@ -172,3 +172,90 @@ FROM customers, salesman, orders
 WHERE customers.city <> salesman.city
 AND orders.customer_id = customers.customer_id
 AND orders.salesman_id = salesman.salesman_id; 
+
+
+CREATE TABLE IF NOT EXISTS orders (
+   ord_no INT NOT NULL,
+   purch_amt  DECIMAL(10, 2),
+   ord_data DATE, 
+   customer_id INT NOT NULL,
+   salesman_id INT NOT NULL
+);
+
+
+
+SELECT customers.cust_name AS "Customer" , customers.grade AS "Grade"
+FROM customers, salesman, orders
+WHERE 
+
+
+CREATE TABLE IF NOT EXISTS departments (
+   DEPARTMENT_ID INT NOT NULL PRIMARY KEY,
+   DEPARTMENT_NAME VARCHAR(50) NOT NULL,
+   MANAGER_ID INT NOT NULL,
+   LOCATION_ID INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS employees (
+   EMPLOYEE_ID INT NOT NULL,
+   FIRST_NAME VARCHAR(50) NOT NULL,
+   LAST_NAME VARCHAR(50) NOT NULL,
+   EMAIL VARCHAR(50) NOT NULL,
+   PHONE_NUMBER VARCHAR(50) NOT NULL,
+   HIRE_DATE DATE NOT NULL,
+   JOB_ID VARCHAR(50) NOT NULL,
+   SALARY DECIMAL(10, 2),
+   COMMISSION_PCT DECIMAL(10, 2),
+   MANAGER_ID INT,
+   DEPARTMENT_ID INT 
+);
+
+
+
+
+SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_ID, D.DEPARTMENT_NAME
+FROM employees E
+JOIN departments D  ON E.DEPARTMENT_ID = D.DEPARTMENT_ID;
+
+
+CREATE TABLE IF NOT EXISTS locations (
+   LOCATION_ID INT NOT NULL PRIMARY KEY,
+   STREET_ADDRESS VARCHAR(250) NOT NULL,
+   POSTAL_CODE INT NOT NULL,
+   CITY VARCHAR(50) NOT NULL,
+   STATE_PROVINCE VARCHAR(100),
+   COUNTRY_ID VARCHAR(50) NOT NULL
+);
+
+
+ALTER TABLE orders
+CHANGE COLUMN old_column_name new_column_name column_definition;
+
+ALTER TABLE locations
+CHANGE COLUMN POSTAL_CODE POSTAL_CODE VARCHAR(250);
+
+ 
+ 
+
+SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY
+FROM employees E
+JOIN departments D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID
+JOIN locations L ON D.LOCATION_ID = L.LOCATION_ID;
+
+
+
+SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME
+FROM employees E 
+JOIN departments D ON E.DEPARTMENT_ID = D.DEPARTMENT_ID 
+AND E.DEPARTMENT_ID IN (80, 40);
+
+
+write a SQL query to find those employees whose first name contains the letter ‘z’.
+Return first name, last name, department, city, and state province.
+
+
+SELECT E.FIRST_NAME, E.LAST_NAME, D.DEPARTMENT_NAME, L.CITY, L.STATE_PROVINCE
+FROM employees E
+JOIN departments D ON E.DEPARTMENT_ID= D.DEPARTMENT_ID
+JOIN locations L ON D.LOCATION_ID = L.LOCATION_ID
+WHERE E.FIRST_NAME LIKE '%Z%';
